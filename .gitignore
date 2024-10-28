@@ -1,6 +1,5 @@
 venv/
 media/
-static/
 node/
 staticfiles/
 __pycache__/
