@@ -1,0 +1,14 @@
+<hero class="grid bg-gray-700 text-white text-center bg-cover z-10 relative bg-center bg-hero">
+    <div class="col-start-1 row-start-1 bg-gray-800 bg-opacity-40 w-full h-full"></div>
+    <div class="col-start-1 row-start-1 py-24 px-10">
+        <h1 class="titleBlip">Awesome Photos & Captions</h1>
+        <p class="text-lg font-bold mb-5">Share your favorite Photos from Flickr and add a great caption</p>
+        <!-- <a class="button" href="#">Get Started</a> -->         
+         {% if not user.is_authenticated %}
+         <a class="inline-flex items-center justify-center px-4 py-2 min-h-[3.3rem] text-white font-semibold bg-[rgb(88,40,244)] hover:bg-[rgb(69,29,200)] rounded-lg shadow-md transition-transform duration-200 active:scale-95"
+             href="{% url 'account_signup' %}">
+             Get Started
+         </a>
+         {% endif %}
+    </div>
+</hero>

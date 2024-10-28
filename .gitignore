@@ -1,0 +1,12 @@
+venv/
+media/
+static/
+node/
+staticfiles/
+__pycache__/
+.env
+.DS_Store
+.idea/
+db.sqlite3
+backup/
+db/sqlite/
