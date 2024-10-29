@@ -108,7 +108,7 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
     },
-    "hide_models": ["sites.site", "socialaccount.socialaccount", "socialaccount.socialtoken", "socialaccount.socialapp"],
+    # "hide_models": ["sites.site", "socialaccount.socialaccount", "socialaccount.socialtoken", "socialaccount.socialapp"],
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -250,7 +250,19 @@ CLOUDINARY_STORAGE = {
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/onboarding/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+if ENVIRONMENT == 'production' or POSTGRESS_LOCALLY:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = config('EMAIL_PORT', cast=int)
+    EMAIL_USE_TLS = True
+    DEFAULT_FROM_EMAIL = f"Awesome {config('EMAIL_HOST_USER')}"
+    ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 
