@@ -99,7 +99,7 @@ html, body {
 p {
     margin-bottom: 1rem;
 }
-form p {
+/* form p {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -126,7 +126,7 @@ label[for="id_remember"] {
 }
 input[name="remember"] {
     width: auto;
-}
+} */
 .btn-red {
     @apply inline-flex bg-red-500;
 }
@@ -227,4 +227,38 @@ input[name="remember"] {
 }
 #profile article p {
     @apply truncate leading-normal;
+}
+
+.allauth content a {
+    @apply underline underline-offset-2
+}
+.allauth content a:hover {
+    @apply text-indigo-500
+}
+.allauth form[action="/accounts/signup/"] ul {
+    @apply hidden
+}
+.allauth form[action="/accounts/signup/"] ul.errorlist {
+    @apply block
+}
+.allauth .helptext {
+    @apply block mt-4
+}
+label {
+    @apply hidden
+}
+input[type=file] {
+    @apply bg-white pl-0
+}
+.textarea, textarea, input {
+    @apply w-full rounded-lg py-4 px-5 bg-gray-100
+}
+.errorlist li {
+    @apply p-1 pl-4 border-l-red-500 border-l-4 border-solid mb-2 text-red-500
+}
+label[for="id_remember"] {
+    @apply inline-block w-auto mr-2
+}
+input[name="remember"] {
+    @apply w-auto
 }

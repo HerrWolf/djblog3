@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
 {% block layout %}
+<content class="block max-w-3xl mx-auto md:p-12">
+    <div class="bg-white rounded-2xl md:drop-shadow-2xl shadow-black w-full p-8">
 
-<content class="block max-w-3xl mx-auto my-12 px-6">
+    {% block content %} 
+    {% endblock %}
 
-    <div class="card p-8 !pb-10">
-        {% block content %}{% endblock content %}
     </div>
-
-
 </content>
-
-
-{% endblock layout %}
+{% endblock %}
