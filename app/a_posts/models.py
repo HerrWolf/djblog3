@@ -74,7 +74,9 @@ class LikedComment(models.Model):
 
 class Reply(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='replies')
-    parent_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    parent_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    parent_reply = models.ForeignKey('Reply', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    level = models.IntegerField(default=1)
     body = models.CharField(max_length=150)
     likes = models.ManyToManyField(User, related_name='likedreplies', through='LikedReply')
     created = models.DateTimeField(auto_now_add=True)

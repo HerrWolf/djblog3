@@ -13,6 +13,7 @@ urlpatterns = [
     path('comment/like/<str:pk>/', like_comment, name='like-comment'),
     path('comment/delete/<str:pk>/', comment_delete_view, name='comment-delete'),
     path('reply-sent/<str:pk>/', reply_sent, name='reply-sent'),
+    path('replyform/<str:pk>/', reply_form, name='reply-form'),
     path('reply/like/<str:pk>/', like_reply, name='like-reply'),
     path('reply/delete/<str:pk>/', reply_delete_view, name='reply-delete'),
 ]

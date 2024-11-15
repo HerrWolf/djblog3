@@ -206,19 +206,35 @@ def reply_sent(request, pk):
 
 
 @login_required
-def reply_delete_view(request, pk):
-    reply = get_object_or_404(Reply, id=pk, author=request.user)
-
+def reply_form(request, pk):
+    reply = get_object_or_404(Reply, id=pk)
+    replyform = NestedReplyCreateForm()
+    
     if request.method == 'POST':
-        reply.delete()
-        messages.success(request, 'Reply was deleted')
-        return redirect('post', reply.parent_comment.parent_post.id)
-
+        form = NestedReplyCreateForm(request.POST)
+        if form.is_valid():
+            reply_nested = form.save(commit=False)
+            reply_nested.author = request.user
+            reply_nested.parent_reply = reply
+            reply_nested.level = reply.level + 1
+            reply_nested.save()
+            messages.success(request, 'Reply was sent')
+            
+            return render(request, 'a_posts/reply.html', {'reply': reply_nested})
+    
     context = {
-        'reply': reply
+        'reply': reply,
+        'replyform': replyform,
     }
 
-    return render(request, 'a_posts/reply_delete.html', context)
+    return render(request, 'snippets/add_replyform.html', context)
+
+
+@login_required
+def reply_delete_view(request, pk):
+    reply = get_object_or_404(Reply, id=pk, author=request.user)
+    reply.delete()
+    return HttpResponse('')
 
 
 # This is a custom decorator
